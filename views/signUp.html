@@ -1,0 +1,120 @@
+<html lang="en" ng-app="myApp">
+  <head>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/0.9.4/angular-material.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=RobotoDraft:300,400,500,700,400italic">
+    <meta name="viewport" content="initial-scale=1" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Faculty Information Management</title>
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
+    <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+    </head>
+    <body  >
+      <div id="holder">
+        <div id="header">
+      <h1>Faculty Information Management</h1>
+      </div>
+      <style>
+      #header 
+      {
+          background-color:black;
+          color:white;
+          text-align:center;
+          padding:5px; 
+      }
+      .form-control {
+    width:200px;
+}
+      </style>
+      <div ng-app="myApp" ng-controller="Ctrl1">
+              <nav class="navbar navbar-inverse">
+            <div class="container-fluid" >
+                <div class="navbar-header ">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div class="collapse navbar-collapse" id="myNavbar">
+                    <ul class="nav navbar-nav navbar-left">
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                       <li class="inactive"><a href="/login">Login</a></li>
+                        <li class="active"><a href="/signup">SignUp</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    <!-- Angular Material Dependencies -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-animate.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-aria.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/0.9.4/angular-material.min.js"></script>
+<div ng-app = "myApp" ngController = "Ctrl1" align='center'>
+	<h2>Register</h2>
+	<input type="Faculty Name" ng-model="name" placeholder="Faculty Name" class="form-control"><br>
+	<input type="Branch" ng-model="branch" placeholder="Branch" class="form-control"><br>
+    <input type="Phone Number" ng-model="phonenumber" placeholder="Phone Number" class="form-control"><br>
+    <input type="Email ID" ng-model="emailID" placeholder="Email ID" class="form-control"><br>
+	<input type="Password" ng-model="password" placeholder="Password" class="form-control"><br>
+	<input type="submit" value="Submit" class="btn btn-primary" ng-click = "post2();showSimpleToast()"/>
+</div>
+</div>
+</div>
+
+</body>
+<script>
+              var app = angular.module('myApp', []);
+    app.controller('Ctrl1', function ($scope, $http) 
+    {
+
+        $scope.reset = function()
+            {
+                $scope.name ="";
+                $scope.branch ="";
+                $scope.phonenumber ="";
+                $scope.emailID ="";
+                $scope.password ="";
+            }
+        $scope.post2 = function()
+        {
+            	var data = {
+                    name : $scope.name,
+                    branch : $scope.branch ,
+                    phonenumber : $scope.phonenumber ,
+                    emailID : $scope.emailID ,
+                    password : $scope.password
+                    };
+                    if($scope.phonenumber.length == 10)
+                    {
+                        $http.post('/postLD', data)
+                        .success(function(data) {
+                            $scope.LogData = data;
+                        })
+                        .error(function(data) {
+                            console.log('Error: ' + data);
+                        });               
+                        $scope.reset();   
+                        window.location.href="/home1"; 
+                    }	  
+                    else
+                    {
+                        //showSimpleToast1();
+                        $scope.reset();
+                    }          
+        }
+       
+        });   
+    </script>
+</html>
+
+
+

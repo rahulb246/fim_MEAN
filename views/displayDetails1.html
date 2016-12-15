@@ -1,0 +1,344 @@
+<html lang="en" ng-app="myApp">
+  <head>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/0.9.4/angular-material.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=RobotoDraft:300,400,500,700,400italic">
+    <meta name="viewport" content="initial-scale=1" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Information Management System</title>
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
+    <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="jquery.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+    <div id="header">
+      <h1>Faculty Information Management</h1>
+      </div>
+      <style>
+      #header 
+      {
+          background-color:black;
+          color:white;
+          text-align:center;
+          padding:5px; 
+      }
+      </style>
+
+      <style>
+      md-sidenav, md-sidenav.md-locked-open, md-sidenav.md-closed.md-locked-open-add-active 
+        {
+        min-width: 200px !important;
+        width: 50vw !important;
+        max-width: 200px !important;
+        }
+      </style>
+      
+            <script type="text/javascript">
+$(document).ready(function(){
+	
+	$(".accordion h3:first").addClass("active");
+	$(".accordion p:not(:first)").hide();
+
+	$(".accordion h3").click(function(){
+		$(this).next("p").slideToggle("slow")
+		.siblings("p:visible").slideUp("slow");
+		$(this).toggleClass("active");
+		$(this).siblings("h3").removeClass("active");
+	});
+
+});
+</script>
+
+<style type="text/css">
+
+.red {
+    color: red;
+}
+.green {
+    color: green;
+}
+.grey {
+    color: grey;
+}
+      
+</style>         
+
+<style type="text/css">
+body {
+	margin: 10px auto;
+	width: 100%;
+	font: 75%/120% Arial, Helvetica, sans-serif;
+}
+.accordion {
+	width: 100%;
+	float:right;
+	border-bottom: solid 1px #c4c4c4;
+}
+.accordion h3 {
+	background: #e9e7e7 url(images/arrow-square.gif) no-repeat right -51px;
+	padding: 7px 15px;
+	margin: 0;
+	font: bold 120%/100% Arial, Helvetica, sans-serif;
+	border: solid 1px #c4c4c4;
+	border-bottom: none;
+	cursor: pointer;
+}
+.accordion h3:hover {
+	background-color: #e3e2e2;
+}
+.accordion h3.active {
+	background-position: right 5px;
+}
+.accordion p {
+	background: #f7f7f7;
+	margin: 0;
+	padding: 10px 15px 20px;
+	border-left: solid 1px #c4c4c4;
+	border-right: solid 1px #c4c4c4;
+}
+body,td,th {
+	font-size: 16px;
+}
+</style>
+  </head>
+  <body  >
+      <div ng-app="myApp" ng-controller="customersCtrl">
+              <nav class="navbar navbar-inverse">
+            <div class="container-fluid" >
+                <div class="navbar-header ">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div class="collapse navbar-collapse" id="myNavbar">
+                    <ul class="nav navbar-nav navbar-left">
+                        <li class="active"><a href="/displaydetails">Home</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="active"><a href="/login">Log out</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+             
+      
+    <!-- Angular Material Dependencies -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-animate.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-aria.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/0.9.4/angular-material.min.js"></script>
+     <script type="text/javascript" src="http://mrrio.github.io/jsPDF/dist/jspdf.debug.js"></script>
+   
+        <div class="container" ng-hide="searched" ng-init="getDetails()" > 
+            <h2>
+                <br/>
+                <br/>
+            <div class="form-group">
+                          <div class="row">
+                              <div class="col-sm-11 col-md-11">          
+                  <md-button class="md-fab md-icon-button md-primary md-hue-3" ng-click="altersidenav()">
+                      <span class="glyphicon glyphicon-filter"></span>
+                        <md-tooltip> Filters</md-tooltip>
+                  </md-button>
+
+            Faculty Details
+                </div>
+                </div>
+                </div>
+            </h2>
+
+                  <md-sidenav md-component-id="left" class="md-sidenav-left md-whiteframe-z2" md-is-open="!showsidenav" ng-cloak>
+                  
+                <h3 > Filters</h3>  
+                      <hr/>
+                      <br/><br/> 
+            <md-checkbox ng-model="radiobranch" ng-init="radiobranch=true">Branch</md-checkbox>
+            <md-checkbox ng-model="radioauthorname" ng-init="radioauthorname=true"> Author Name</md-checkbox>
+            <md-checkbox ng-model="radiophonenumber" ng-init="radiophonenumber=true"> Phone Number</md-checkbox>
+            <md-checkbox ng-model="radioemail" ng-init="radioemail=true">Email ID</md-checkbox>
+            <md-button class="md-raised" ng-click="altersidenav()">Close</md-button> 
+                  </md-sidenav>
+            <table class="table table-hover" style="width:100%">
+                <thead>
+                    <tr>
+                      <th ng-show="radiobranch">Branch</th>
+                        <th ng-show="radioauthorname"><span class="glyphicon glyphicon-user"></span>Author Name</th>
+                        
+                        <th ng-show="radiophonenumber">
+                            <span class="glyphicon glyphicon-earphone"></span>
+                            Phone Number</th>
+                        <th ng-show="radioemail">
+                            <span class="glyphicon glyphicon-envelope"></span>
+                            Email Id</th>
+                    </tr>
+                </thead>
+                <tbody ng-repeat="x in myjson | orderBy:'name' " ng-click="getRPDetails(x.name)" >
+                    <tr>
+                        <td ng-show="radioauthorname">{{x.branch}}</td>
+                        <td ng-show="radiobranch">{{x.name}}</td>
+                        <td ng-show="radiophonenumber">{{x.phonenumber}}</td>
+                        <td ng-show="radioemail">{{x.email}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    
+    <div class="container" ng-show="searched" >
+        <br />
+        <br />
+        <br />
+        <div class="container-fluid" >
+<div class="accordion">    
+    
+	<h3>AUTHOR PUBLICATIONS        
+        <div class="pull-right btn-group btn-group-xs">
+        <button type="button" class="btn btn-info" ng-click = "printData(o[0].Aname)" > DOWNLOAD A PDF </button>
+        </div>
+    
+    </h3>
+    <li ng-repeat = "x in o">
+	<p><b>Author Name</b> : {{x.Aname}}
+        <br /><br />
+        <b>Co-Author Name</b> : {{x.CAname}}
+        <br /><br />
+<b>Type of the Paper</b> : {{x.ToPaper}}
+        <br /><br />
+  <b>Title of the paper</b> : {{x.TIoPaper}}
+	    <br /><br />
+  <b>Conference Title</b> : {{x.CTitle}}
+    <br /><br />
+ <b>Page numbers</b> : {{x.Spg + "-" + x.Epg}}
+        <br /><br />
+  <b>Place</b> : {{x.place}}
+        <br /><br />
+<b>Volume Number</b> : {{x.Vno}}
+        <br /><br />
+  <b>Indexed By</b> : {{x.IndexedBy}}
+        <br /><br />
+
+	</p>
+    </li>    
+    </div>
+    </div>
+      <script>
+      var app = angular.module('myApp', ['ngMaterial']);
+    app.controller('customersCtrl', function ($scope, $http, DataService) 
+    {
+            $scope.searched = false;
+            $scope.ownerdbid="";
+            $scope.flatdbid="";
+            $scope.tenantdbid="";
+            $scope.ownerid = "";
+            $scope.flatNumberEntered;
+            $scope.flatno="";            
+            $scope.color =[ 'red' , 'green' ];
+            $scope.years =[ 'JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC' ];
+            $scope.showsidenav=true;
+            $scope.t="";
+            $scope.o=[];
+            $scope.f="";
+    
+            $scope.altersidenav = function()
+            {
+                $scope.showsidenav = !$scope.showsidenav;
+            }
+                        
+            var start = 2010;
+            $scope.end = new Date().getFullYear();
+            var options = "";
+            for(var year = start ; year <=$scope.end; year++)
+            {
+                options += "<option>"+ year +"</option>";
+            }           
+            $scope.resetLabels = function()
+            {
+                    $scope.t="";
+                    $scope.o=[];
+                                      
+            }
+            $scope.getRPDetails = function (inputsearch) 
+            {
+                $scope.resetLabels();
+                if(inputsearch == "")
+                {
+                }
+                else
+                {
+                    $scope.searched = true;
+                    $scope.nameEntered=inputsearch;
+                    console.log(inputsearch);
+                    for (var i = 0,j=0; i < $scope.rp.length; i++) 
+                    {
+                        console.log("in for loop");
+                        if ($scope.rp[i].Aname === inputsearch || $scope.rp[i].CAname === inputsearch) 
+                        {
+                            $scope.o[j] = $scope.rp[i];
+                            j++;
+                        }
+                    }
+                    console.log($scope.o);
+                }
+            }        
+            /*$scope.getDetails = function() {
+                DataService.getOwnersData().then(
+                    $scope.getOwnersDataSuccessHandler
+                );
+            }*/
+            $scope.printData = function(name)
+            {
+               // $http.get("/printData")
+                //.success(function(response){});
+               var i=3;
+               var doc = new jsPDF();
+               doc.text(20,20, 'PUBLICATIONS OF '+name);
+               doc.line(20,25,200,25);
+               for(var z=0;z < $scope.o.length; z++)
+               {
+                doc.text(20, i*10, 'Author Name: '+$scope.o[z].Aname);
+                i++;
+                doc.text(20, i*10, 'Co-Author Name: '+$scope.o[z].CAname);
+                i++;
+                doc.text(20, i*10, 'Type of the paper: '+$scope.o[z].ToPaper);
+                i++;
+                doc.text(20, i*10, 'Title of the paper: '+$scope.o[z].TIoPaper);
+                i++;
+                doc.text(20, i*10, 'Conference Title: '+$scope.o[z].CTitle);
+                i++;
+                doc.text(20, i*10, 'Volume Number: '+$scope.o[z].Vno);
+                i++;
+                doc.text(20, i*10, 'Index Number: '+$scope.o[z].IndexedBy);
+                i++;
+                doc.line(20,i*10,200,i*10);
+                i++;
+               }
+                doc.save('sample-file.pdf');
+            }
+            
+                                        
+            $http.get("/FDetails")
+            .success(function (response) { $scope.rp = response.docs; });
+
+            $http.get("/LDetails")
+            .success(function (response) { $scope.myjson = response.docs;});
+
+        });
+        app.factory("DataService",function($http,$location){
+    
+            var _getDataService = 
+            {
+                
+            }
+            
+            return _getDataService;
+        });
+    </script>
+  </body>
+</html>

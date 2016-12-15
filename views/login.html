@@ -1,0 +1,174 @@
+<html lang="en" ng-app="myApp">
+  <head>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/0.9.4/angular-material.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=RobotoDraft:300,400,500,700,400italic">
+    <meta name="viewport" content="initial-scale=1" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Faculty Information Management</title>
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
+    <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    
+    <!--<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>-->
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+    </head>
+    <body  >
+        <div id="header">
+      <h1>Faculty Information Management</h1>
+      </div>
+      <style>
+      #header 
+      {
+          background-color:black;
+          color:white;
+          text-align:center;
+          padding:5px; 
+      }
+      .form-control {
+    width:200px;
+    margin: 0 auto;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+.div1{
+     margin: 0 auto;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+      </style>
+      <div ng-app="myApp" ng-controller="Ctrl1">
+              <nav class="navbar navbar-inverse">
+            <div class="container-fluid" >
+                <div class="navbar-header ">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div class="collapse navbar-collapse" id="myNavbar">
+                    <ul class="nav navbar-nav navbar-right">
+                      <li class="active"><a href="/login">Login</a></li>
+                        <li class="inactive"><a href="/signup">SignUp</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+      
+    <!-- Angular Material Dependencies -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-animate.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-aria.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/0.9.4/angular-material.min.js"></script>
+
+<div class='div1' ng-app = "myApp" ngController = "Ctrl1" align='center'>
+    <h3>Welcome to Faculty Information Management Application</h3>
+    <h3>A faster and reliable way to manage and track Faculty Achievements</h3>
+    <h5>To create an account click on Signup which is on top right corner of the page, If u already have an account then login below</h5>
+	<h2>Log In</h2>
+  <p class="text-warning">{{error_message}}</p>
+    <center>
+	<input type="User Name" ng-model="username" width='30%' placeholder="User name" class="form-control"><br>
+	<input type="Password" ng-model="password" width='30%' placeholder="password" class="form-control"><br>
+	<input type="submit" value="Submit" class="btn btn-primary" ng-click = "get1()"/>
+</center>
+ </div>
+</body>
+<script>
+    var app = angular.module('myApp', []);
+    app.controller('Ctrl1',function ($scope, $http) 
+    {
+        
+
+            $scope.reset = function()
+            {
+                $scope.username ="";
+            $scope.password ="";
+            }
+            $scope.get1 = function()
+            {
+                if ($scope.username == "admin")
+                {
+                    console.log("jkhfas"); 
+                    window.location.href="/displaydetails"; 
+                }
+                else
+                {
+                    
+                    
+                console.log("abc");
+            	
+                    var myjson = [];
+                    $http.get("/LDetails")
+                    .success(function (response) { myjson = response.docs;
+                        var flag=0;
+                    console.log(myjson)
+                    for(var i=0; i< myjson.length ;i++)
+                    {
+                        if(myjson[i].name===$scope.username && myjson[i].password === $scope.password)
+                        {    
+                            window.location.href="/home1";
+                            flag=1;
+                        }
+                    }
+                    if(flag==0)
+                    {
+                        //$scope.showSimpleToast();
+                        $scope.reset();
+                    }
+                    });
+                    
+                    /*$http.get('/get', data)
+                        .success(function(data) {
+                            $scope.logData = data;
+                        })
+                        .error(function(data) {
+                            console.log('Error: ' + data);
+                        });           
+                        $scope.reset();
+                        */
+                }
+
+            }  
+            /*var last = {
+          bottom: true,
+          top: true, 
+          left: true,
+          right: true
+        };
+          $scope.toastPosition = angular.extend({},last);
+          $scope.getToastPosition = function() {
+            sanitizePosition();
+            return Object.keys($scope.toastPosition)
+              .filter(function(pos) { return $scope.toastPosition[pos]; })
+              .join(' ');
+          };
+          function sanitizePosition() {
+            var current = $scope.toastPosition;
+            if ( current.bottom && last.top ) current.top = false;
+            if ( current.top && last.bottom ) current.bottom = false;
+            if ( current.right && last.left ) current.left = false;
+            if ( current.left && last.right ) current.right = false;
+            last = angular.extend({},current);
+          }
+          $scope.showSimpleToast = function() {
+            $mdToast.show(
+              $mdToast.simple()
+                .content('Invalid username or password, please try again..!!')
+                .position($scope.getToastPosition())
+                .hideDelay(3000)
+            );
+          }; 
+        }])
+        .controller('ToastCtrl', function($scope, $mdToast) {
+                $scope.closeToast = function() {
+                    $mdToast.hide();
+                }; */
+        });
+</script>
+</html>

@@ -1,0 +1,260 @@
+<html lang="en" ng-app="myApp">
+  <head>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/0.9.4/angular-material.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=RobotoDraft:300,400,500,700,400italic">
+    <meta name="viewport" content="initial-scale=1" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Faculty Information Management</title>
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
+    <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="jquery.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+
+  </head>
+  <body  >
+      <div id="header">
+      <h1>Faculty Information Management</h1>
+      </div>
+      <style>
+      #header 
+      {
+          background-color:black;
+          color:white;
+          text-align:center;
+          padding:5px; 
+      }
+      </style>
+      <div ng-app="myApp" ng-controller="Ctrl" align='center'>
+              <nav class="navbar navbar-inverse">
+            <div class="container-fluid" >
+                <div class="navbar-header ">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div class="collapse navbar-collapse" id="myNavbar">
+                    <ul class="nav navbar-nav navbar-left">
+                        <li class="active"><a href="/home">Home</a></li>
+            
+                     
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="inactive"><a href="/login">Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+      <h3>Hello, Please fill this form and submit to add an achievment. If you want to logout please click the Logout which is on the top right corner of the page.</h3>
+    <!-- Angular Material Dependencies -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-animate.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-aria.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/0.9.4/angular-material.min.js"></script>
+                                        <div class="form-group">              
+                              <div class="row">
+<div class="col-sm-9 col-md-9">                  
+    
+                                  </div>
+<div class="col-sm-3 col-md-3">                  
+
+                          <div ng-hide="dateEditorEnabled">Date: {{date | date:'dd-MM-yyyy'}}<br>
+            <a href="" ng-click="enableEditor()">Change Date</a>
+        </div>
+        <div ng-show="dateEditorEnabled">
+            <input type="date" ng-model="editableDate" ng-show="dateEditorEnabled">
+            <a href="" ng-click="save()">Save</a>
+            or
+            <a href="" ng-click="disableEditor()">cancel</a>
+        </div><br>
+
+                                  </div>
+                                  </div>
+          </div>
+                                                  <div class="form-group">              
+                              <div class="row">
+<div class="col-sm-1 col-md-1">
+                                  </div>
+<div class="col-sm-10 col-md-10">                  
+    <div layout layout-sm="column">
+                <md-input-container flex>
+          <label>Author Name </label>
+          <input ng-model="Aname" >
+        </md-input-container>
+                          <md-input-container flex>
+          <label>Co-Author Name </label>
+          <input ng-model="CAname" >
+        </md-input-container>
+    </div>
+    <div layout layout-sm="column">
+                <md-input-container flex>
+          <label>Type of the Paper </label>
+          <input ng-model="ToPaper" >
+        </md-input-container>
+    </div>
+    <div layout layout-sm="column">
+                <md-input-container flex>
+          <label>Title of the Paper </label>
+          <input ng-model="TIoPaper" >
+        </md-input-container>
+    </div>
+    <div layout layout-sm="column">
+                <md-input-container flex>
+          <label>Conferennce Title </label>
+          <input ng-model="CTitle" >
+        </md-input-container>
+    </div>
+    <div layout layout-sm="column">
+                <md-input-container flex>
+          <label>Starting Page number </label>
+          <input ng-model="Spg" >
+        </md-input-container>
+                          <md-input-container flex>
+          <label>Ending Page number </label>
+          <input ng-model="EPg" >
+        </md-input-container>
+    </div>
+    <div layout layout-sm="column">
+                <md-input-container flex>
+          <label>Place </label>
+          <input ng-model="place" >
+        </md-input-container>
+                          <md-input-container flex>
+          <label>Volume number </label>
+          <input ng-model="Vno" >
+        </md-input-container>
+    </div>
+    <div layout layout-sm="column">
+                <md-input-container flex>
+          <label>Indexed By </label>
+          <input ng-model="IndexedBy" >
+        </md-input-container>
+    </div>
+     <md-button class=" md-raised md-mini" ng-click="createRP();showSimpleToast()">Submit</md-button>
+
+                                 
+        <script>
+        var app = angular.module('myApp', ['ngMaterial']);
+        app.controller('Ctrl', function ($scope,$http,$mdToast) 
+        {
+            $scope.Aname ;
+            $scope.CAname ;
+            $scope.date = new Date();
+            $scope.dateEditorEnabled = false;
+            $scope.ToPaper;
+            $scope.TIoPaper;
+            $scope.CTitle;
+            $scope.Spg ;
+            var getYear = new Date().getFullYear();
+            $scope.year = getYear;
+            $scope.createReceipts;
+            $scope.disable=false;
+            $scope.EPg;
+            $scope.place;
+            $scope.Vno;
+            $scope.IndexedBy;
+            $scope.reset = function()
+            {
+                $scope.Aname ="";
+            $scope.CAname ="";
+            $scope.ToPaper ="";
+            $scope.TIoPaper ="";
+            $scope.CTitle ="";
+            $scope.Spg ="";
+            $scope.EPg ="";
+            $scope.place ="";
+            $scope.Vno ="";
+            $scope.IndexedBy ="";
+            }
+            $scope.createRP = function() {
+                    var data = {
+                    Aname: $scope.Aname ,
+            CAname: $scope.CAname ,
+            ToPaper: $scope.ToPaper ,
+            TIoPaper: $scope.TIoPaper ,
+            CTitle: $scope.CTitle ,
+            Spg: $scope.Spg ,
+            Epg: $scope.EPg ,
+            place: $scope.place ,
+            Vno: $scope.Vno ,
+            IndexedBy: $scope.IndexedBy
+                    };
+                    console.log(data);
+                    $http.post('/postFacD', data)
+                        .success(function(data) {
+                          console.log(data);
+                            $scope.fdetails = data;
+                        })
+                        .error(function(data) {
+                            console.log('Error: ' + data);
+                        });
+                        
+                        $scope.reset();    
+                
+                };
+            
+            $scope.enableEditor = function () {
+                $scope.dateEditorEnabled = true;
+                $scope.editableDate = $scope.date;
+            };
+            $scope.disableEditor = function () {
+                $scope.dateEditorEnabled = false;
+            };
+
+            $scope.save = function () {
+                $scope.date = $scope.editableDate;
+                $scope.disableEditor();
+            };
+            
+                        
+ var last = {
+      bottom: true,
+      top: true,
+        
+      left: true,
+      right: true
+    };
+  $scope.toastPosition = angular.extend({},last);
+  $scope.getToastPosition = function() {
+    sanitizePosition();
+    return Object.keys($scope.toastPosition)
+      .filter(function(pos) { return $scope.toastPosition[pos]; })
+      .join(' ');
+  };
+  function sanitizePosition() {
+    var current = $scope.toastPosition;
+    if ( current.bottom && last.top ) current.top = false;
+    if ( current.top && last.bottom ) current.bottom = false;
+    if ( current.right && last.left ) current.left = false;
+    if ( current.left && last.right ) current.right = false;
+    last = angular.extend({},current);
+  }
+  $scope.showSimpleToast = function() {
+    $mdToast.show(
+      $mdToast.simple()
+        .content('Paper Details Submitted..!!')
+        .position($scope.getToastPosition())
+        .hideDelay(3000)
+    );
+  };
+
+})
+.controller('ToastCtrl', function($scope, $mdToast) {
+  $scope.closeToast = function() {
+    $mdToast.hide();
+  }; 
+        });
+            
+        
+    </script>
+    </body>
+</html>
